@@ -1,7 +1,7 @@
 export class Game {
     constructor() {
-        this.gameState = {
-            currentGame: [],
+        this.state = {
+            currentBoard: [],
             playerTurn: 'X',
             settings: {}
         };
@@ -17,6 +17,16 @@ export class Game {
     }
 
     setGame(settings) {
-        this.gameState.settings = settings;
+        this.state.settings = settings;
+        this.state.currentBoard = this.createGameBoard();
+    }
+
+    createGameBoard() {
+        const initialGameBoard = new Array(9).fill(0)
+        return initialGameBoard;
+    }
+
+    checkState() {
+
     }
 }

@@ -1,8 +1,11 @@
-import { Game } from "./model/Game"
+import { startGame, test } from "./model/startGame";
 
-export function startGame(settings) {
-    console.log('Game Start')
-    const GAME = new Game();
-    GAME.setGame(settings);
-    console.log({ GAME });
+export function startNewGame(settings) {
+    console.log('Game Start');
+    let gameBoard = startGame(settings);
+    return gameBoard
+}
+
+export function checkState() {
+
 }

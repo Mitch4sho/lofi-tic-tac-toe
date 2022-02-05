@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { startGame } from "./controller";
+import { startNewGame } from "./controller";
 import GameMenuPage from "./pages/GameMenuPage";
 import GamePage from "./pages/GamePage";
 import "./App.css";
 
 function App() {
+  const [gameState, setGameState] = useState([]);
   const [playerSelection, setPlayerSelection] = useState("");
   const [playerSettings, setPlayerSettings] = useState({
     playersPick: "",
@@ -20,8 +21,13 @@ function App() {
     });
   };
 
+  const updateBoard = (id) => {
+    console.log("updating the board");
+  };
+
   const submitPlayerSettings = () => {
-    startGame(playerSettings);
+    let gameBoard = startNewGame(playerSettings);
+    setGameState([...gameBoard]);
   };
 
   return (
@@ -38,7 +44,12 @@ function App() {
               />
             }
           />
-          <Route path="/game" element={<GamePage />} />
+          <Route
+            path="/game"
+            element={
+              <GamePage gameBoard={gameState} updateBoard={updateBoard} />
+            }
+          />
         </Routes>
       </Router>
     </div>
