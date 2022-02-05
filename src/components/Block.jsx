@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Block({ content, id }) {
+export default function Block({ content, id, updateBoard }) {
   return (
-    <div className="block-container">
-      <div>X</div>
-    </div>
+    <li onClick={() => updateBoard(id)} className="block-container">
+      <div>{content}</div>
+    </li>
   );
 }

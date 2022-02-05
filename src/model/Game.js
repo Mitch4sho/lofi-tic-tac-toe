@@ -26,6 +26,16 @@ export class Game {
         return initialGameBoard;
     }
 
+    update(idx, player) {
+        let board = this.state.currentBoard;
+        board[idx] = player;
+        this.state.playerTurn = player === "X" ? "O" : "X";
+    }
+
+    checkValidMove(idx) {
+        return this.state.currentBoard[idx] === 0;
+    }
+
     checkState() {
 
     }

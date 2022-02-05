@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { startNewGame } from "./controller";
+import { startNewGame, boardUpdater } from "./controller";
 import GameMenuPage from "./pages/GameMenuPage";
 import GamePage from "./pages/GamePage";
 import "./App.css";
@@ -22,7 +22,9 @@ function App() {
   };
 
   const updateBoard = (id) => {
-    console.log("updating the board");
+    console.log("updating the board", { id });
+    let newBoardState = boardUpdater(id);
+    setGameState([...newBoardState]);
   };
 
   const submitPlayerSettings = () => {

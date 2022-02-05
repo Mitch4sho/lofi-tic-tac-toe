@@ -1,4 +1,4 @@
-import { startGame, test } from "./model/startGame";
+import { startGame, check, updateGame } from "./model/startGame";
 
 export function startNewGame(settings) {
     console.log('Game Start');
@@ -6,6 +6,10 @@ export function startNewGame(settings) {
     return gameBoard
 }
 
-export function checkState() {
+export function boardUpdater(id) {
+    return updateGame(id);
+}
 
+export function checkState() {
+    check();
 }

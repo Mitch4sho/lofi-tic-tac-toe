@@ -1,14 +1,24 @@
 import { Game } from './Game';
-let gameState = {};
+const gameState = new Game();
 
 export function startGame(settings) {
-    gameState = new Game();
     gameState.setGame(settings);
-    console.log({ gameState });
 
     return gameState.state.currentBoard;
 }
 
-export function test() {
+export function updateGame(idx) {
+    let validMove = gameState.checkValidMove(idx);
+    let player = gameState.state.playerTurn;
+
+    if (validMove) {
+        console.log('adding move');
+        gameState.update(idx, player);
+    }
+
+    return gameState.state.currentBoard;
+}
+
+export function check() {
     console.log({ gameState });
 }
