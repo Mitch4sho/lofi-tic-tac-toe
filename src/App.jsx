@@ -12,6 +12,11 @@ function App() {
     playersPick: "",
     gameMode: "",
   });
+  const [playerScore, setPlayerScore] = useState({
+    wins: 0,
+    ties: 0,
+    losses: 0,
+  });
 
   const updateSettings = (mode) => {
     setPlayerSettings({
@@ -32,11 +37,13 @@ function App() {
     setGameState([]);
   };
 
-  const handlePlayerSettings = () => {
-    let gameBoard = startNewGame(playerSettings);
-    setGameState([...gameBoard]);
+  const handleStartGame = () => {
+    const { state, playerInfo } = startNewGame(playerSettings);
+    setGameState([...state.currentBoard]);
+    setPlayerScore({ ...playerScore, ...playerInfo.playerScore });
   };
 
+  console.log({ gameState, playerScore });
   return (
     <div className="App">
       <Router>
@@ -46,7 +53,7 @@ function App() {
             element={
               <GameMenuPage
                 setPlayerSelection={setPlayerSelection}
-                submitSettings={handlePlayerSettings}
+                handleStartGame={handleStartGame}
                 updateSettings={updateSettings}
               />
             }
@@ -58,6 +65,7 @@ function App() {
                 gameBoard={gameState}
                 updateBoard={handleUpdate}
                 handleRestart={handleRestart}
+                playerScore={playerScore}
               />
             }
           />

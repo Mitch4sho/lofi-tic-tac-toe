@@ -4,28 +4,25 @@ import PlayerSelection from "../components/PlayerSelection";
 
 export default function GameMenuPage({
   setPlayerSelection,
-  submitSettings,
+  handleStartGame,
   updateSettings,
 }) {
   let navigate = useNavigate();
 
-  const handleSubmission = () => {
-    submitSettings();
+  const handleNewGame = () => {
+    handleStartGame();
     navigate("/game");
   };
 
   return (
     <div>
       <h1>Game Menu</h1>
-      <PlayerSelection
-        setPlayer={setPlayerSelection}
-        submitSettings={submitSettings}
-      />
+      <PlayerSelection setPlayer={setPlayerSelection} />
       <button onClick={() => updateSettings("CPU")}>New Game(VS CPU)</button>
       <button onClick={() => updateSettings("PLAYER")}>
         New Game(VS PLAYER)
       </button>
-      <button onClick={handleSubmission}>Start Game</button>
+      <button onClick={handleNewGame}>Start Game</button>
     </div>
   );
 }

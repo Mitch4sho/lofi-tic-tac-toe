@@ -1,9 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Block from "../components/Block";
+import ScoreKeeper from "../components/ScoreKeeper";
 import { checkState } from "../controller";
 
-export default function GamePage({ gameBoard, updateBoard, handleRestart }) {
+export default function GamePage({
+  gameBoard,
+  updateBoard,
+  handleRestart,
+  playerScore,
+}) {
   const navigate = useNavigate();
 
   const restart = () => {
@@ -27,6 +33,7 @@ export default function GamePage({ gameBoard, updateBoard, handleRestart }) {
           );
         })}
       </ul>
+      <ScoreKeeper playerScore={playerScore} />
       <button onClick={checkState}>check game state</button>
     </div>
   );

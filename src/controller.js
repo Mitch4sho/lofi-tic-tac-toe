@@ -5,7 +5,7 @@ let gameState = new Game();
 export function startNewGame(settings) {
     console.log('Game Start');
     gameState.setGame(settings);
-    return gameState.state.currentBoard;
+    return gameState;
 }
 
 export function boardUpdater(idx) {
