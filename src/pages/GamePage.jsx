@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Block from "../components/Block";
 import ScoreKeeper from "../components/ScoreKeeper";
-import { checkState } from "../controller";
+import Modal from "../components/Modal";
 
 export default function GamePage({
   gameBoard,
   updateBoard,
   handleRestart,
   playerScore,
+  handleNextRound,
 }) {
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
 
   const restart = () => {
@@ -17,9 +19,15 @@ export default function GamePage({
     handleRestart();
   };
 
+  const nextRound = () => {
+    handleNextRound();
+    setActive(false);
+  };
+
   return (
-    <div style={{ height: "100vh" }}>
+    <div className="game-page-container">
       <h1>Game</h1>
+      <button onClick={() => setActive(true)}>Active modal</button>
       <button onClick={restart}>Restart</button>
       <ul>
         {gameBoard.map((content, id) => {
@@ -34,7 +42,7 @@ export default function GamePage({
         })}
       </ul>
       <ScoreKeeper playerScore={playerScore} />
-      <button onClick={checkState}>check game state</button>
+      <Modal handleNextRound={nextRound} handleExit={restart} active={active} />
     </div>
   );
 }

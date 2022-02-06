@@ -27,6 +27,3 @@ export function restartGame() {
     return gameState.state.currentBoard;
 }
 
-export function checkState() {
-    console.log({ gameState });
-}

@@ -61,6 +61,11 @@ function App() {
     setPlayerScore({ ...playerScore, ...playerInfo.playerScore });
   };
 
+  const handleNextRound = () => {
+    const { state } = startNewGame(playerSettings);
+    setGameState([...state.currentBoard]);
+  };
+
   console.log(currentPlayer);
   return (
     <div className="App">
@@ -84,6 +89,7 @@ function App() {
                 updateBoard={handleUpdate}
                 handleRestart={handleRestart}
                 playerScore={playerScore}
+                handleNextRound={handleNextRound}
               />
             }
           />
