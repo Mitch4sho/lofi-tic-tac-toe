@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PlayerSelection from "../components/PlayerSelection";
+import { GameMenuWrapper } from "../components/styles/GameMenuWrapper.styles";
+import { HeaderStyled } from "../components/styles/Header.styles";
 
 export default function GameMenuPage({
   setPlayerSelection,
@@ -15,14 +17,14 @@ export default function GameMenuPage({
   };
 
   return (
-    <div>
-      <h1>Game Menu</h1>
+    <GameMenuWrapper>
+      <HeaderStyled />
       <PlayerSelection setPlayer={setPlayerSelection} />
       <button onClick={() => updateSettings("CPU")}>New Game(VS CPU)</button>
       <button onClick={() => updateSettings("PLAYER")}>
         New Game(VS PLAYER)
       </button>
       <button onClick={handleNewGame}>Start Game</button>
-    </div>
+    </GameMenuWrapper>
   );
 }

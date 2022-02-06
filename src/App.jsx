@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import { startNewGame, boardUpdater, restartGame } from "./controller";
 import GameMenuPage from "./pages/GameMenuPage";
 import GamePage from "./pages/GamePage";
+import { theme } from "./components/styles/Theme.styles";
+import GlobalStyles from "./components/styles/Global.styles";
+import { AppContainer } from "./components/styles/AppContainer.styles";
 import "./App.css";
+import IconO from "./components/icons/IconO";
 
 function App() {
   const [gameState, setGameState] = useState([]);
@@ -66,36 +71,38 @@ function App() {
     setGameState([...state.currentBoard]);
   };
 
-  console.log(currentPlayer);
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <GameMenuPage
-                setPlayerSelection={setPlayerSelection}
-                handleStartGame={handleStartGame}
-                updateSettings={updateSettings}
-              />
-            }
-          />
-          <Route
-            path="/game"
-            element={
-              <GamePage
-                gameBoard={gameState}
-                updateBoard={handleUpdate}
-                handleRestart={handleRestart}
-                playerScore={playerScore}
-                handleNextRound={handleNextRound}
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <AppContainer>
+        <GlobalStyles />
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <GameMenuPage
+                  setPlayerSelection={setPlayerSelection}
+                  handleStartGame={handleStartGame}
+                  updateSettings={updateSettings}
+                />
+              }
+            />
+            <Route
+              path="/game"
+              element={
+                <GamePage
+                  gameBoard={gameState}
+                  updateBoard={handleUpdate}
+                  handleRestart={handleRestart}
+                  playerScore={playerScore}
+                  handleNextRound={handleNextRound}
+                />
+              }
+            />
+          </Routes>
+        </Router>
+      </AppContainer>
+    </ThemeProvider>
   );
 }
 
