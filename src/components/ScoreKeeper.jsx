@@ -2,7 +2,6 @@ import React from "react";
 import Card from "./Card";
 
 export default function ScoreKeeper({ playerScore }) {
-  console.log(playerScore);
   return (
     <ul>
       <Card content="X (YOU)" value={playerScore.wins} />
