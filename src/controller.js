@@ -1,4 +1,4 @@
-import { startGame, check, updateGame } from "./model/startGame";
+import { startGame, check, updateGame, restart } from "./model/startGame";
 
 export function startNewGame(settings) {
     console.log('Game Start');
@@ -8,6 +8,11 @@ export function startNewGame(settings) {
 
 export function boardUpdater(id) {
     return updateGame(id);
+}
+
+export function restartGame() {
+    let gameBoard = restart();
+    return gameBoard;
 }
 
 export function checkState() {

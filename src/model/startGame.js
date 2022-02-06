@@ -19,6 +19,13 @@ export function updateGame(idx) {
     return gameState.state.currentBoard;
 }
 
+export function restart() {
+    gameState.state.currentBoard = [];
+    gameState.state.settings = {};
+
+    return gameState.state.currentBoard
+}
+
 export function check() {
     console.log({ gameState });
 }

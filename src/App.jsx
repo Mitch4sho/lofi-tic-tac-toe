@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { startNewGame, boardUpdater } from "./controller";
+import { startNewGame, boardUpdater, restartGame } from "./controller";
 import GameMenuPage from "./pages/GameMenuPage";
 import GamePage from "./pages/GamePage";
 import "./App.css";
@@ -21,13 +21,18 @@ function App() {
     });
   };
 
-  const updateBoard = (id) => {
+  const handleUpdate = (id) => {
     console.log("updating the board", { id });
     let newBoardState = boardUpdater(id);
     setGameState([...newBoardState]);
   };
 
-  const submitPlayerSettings = () => {
+  const handleRestart = () => {
+    restartGame();
+    setGameState([]);
+  };
+
+  const handlePlayerSettings = () => {
     let gameBoard = startNewGame(playerSettings);
     setGameState([...gameBoard]);
   };
@@ -41,7 +46,7 @@ function App() {
             element={
               <GameMenuPage
                 setPlayerSelection={setPlayerSelection}
-                submitSettings={submitPlayerSettings}
+                submitSettings={handlePlayerSettings}
                 updateSettings={updateSettings}
               />
             }
@@ -49,7 +54,11 @@ function App() {
           <Route
             path="/game"
             element={
-              <GamePage gameBoard={gameState} updateBoard={updateBoard} />
+              <GamePage
+                gameBoard={gameState}
+                updateBoard={handleUpdate}
+                handleRestart={handleRestart}
+              />
             }
           />
         </Routes>
