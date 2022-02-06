@@ -1,20 +1,32 @@
-import { startGame, check, updateGame, restart } from "./model/startGame";
+import { Game } from './model/Game';
+
+let gameState = new Game();
 
 export function startNewGame(settings) {
     console.log('Game Start');
-    let gameBoard = startGame(settings);
-    return gameBoard
+    gameState.setGame(settings);
+    return gameState.state.currentBoard;
 }
 
-export function boardUpdater(id) {
-    return updateGame(id);
+export function boardUpdater(idx) {
+    let validMove = gameState.checkValidMove(idx);
+    let player = gameState.state.playerTurn;
+
+    if (validMove) {
+        console.log('adding move');
+        gameState.update(idx, player);
+    }
+
+    return gameState.state.currentBoard;
 }
 
 export function restartGame() {
-    let gameBoard = restart();
-    return gameBoard;
+    gameState.state.currentBoard = [];
+    gameState.state.settings = {};
+
+    return gameState.state.currentBoard
 }
 
 export function checkState() {
-    check();
+    console.log({ gameState });
 }
