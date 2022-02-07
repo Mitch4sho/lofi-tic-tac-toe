@@ -4,6 +4,7 @@ export const theme = {
   fontPrimaryColor: "#65E9E4",
   fontSecondaryColor: "#FFC860",
   fontAccentColor: "#DBE8ED",
+  fontAccentSecondaryColor: "#A8BFC9",
 
   fontSizing: {
     large: "40px",
@@ -20,11 +21,4 @@ export const theme = {
     accentColor: "#DBE8ED",
     accentColorActive: "#A8BFC9",
   },
-
-  icon: {
-    headerSizing: '32px',
-    accentColor: '#DBE8ED',
-    accentSecondaryColor: '#1A2A33'
-  }
-
 };

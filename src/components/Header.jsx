@@ -1,12 +1,12 @@
 import React from "react";
-import IconO from "./icons/IconO";
-import IconX from "./icons/IconX";
+import { MiniIconO } from "./icons/IconO";
+import { MiniIconX } from "./icons/IconX";
 
 export default function Header({ className }) {
   return (
     <div className={className}>
-      <IconX width={"32"} height={"32"} />
-      <IconO />
+      <MiniIconX />
+      <MiniIconO />
     </div>
   );
 }

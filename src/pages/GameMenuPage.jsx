@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import PlayerSelection from "../components/PlayerSelection";
+import { PlayerSelectionStyled } from "../components/styles/PlayerSelectionStyled.styles";
 import { GameMenuWrapper } from "../components/styles/GameMenuWrapper.styles";
 import { HeaderStyled } from "../components/styles/Header.styles";
 
@@ -19,7 +19,7 @@ export default function GameMenuPage({
   return (
     <GameMenuWrapper>
       <HeaderStyled />
-      <PlayerSelection setPlayer={setPlayerSelection} />
+      <PlayerSelectionStyled setPlayer={setPlayerSelection} />
       <button onClick={() => updateSettings("CPU")}>New Game(VS CPU)</button>
       <button onClick={() => updateSettings("PLAYER")}>
         New Game(VS PLAYER)
