@@ -4,7 +4,8 @@ import PlayerSelection from "../PlayerSelection";
 export const PlayerSelectionStyled = styled(PlayerSelection)`
   background-color: ${(props) => props.theme.backgroundSecondaryColor};
   padding: 24px;
-  border-radius: 10px;
+  box-shadow: inset 0px -8px 0px #10212a;
+  border-radius: 15px;
 
   display: flex;
   flex-direction: column;
@@ -43,11 +44,21 @@ export const SelectionContainer = styled.div`
     border: none;
     border-radius: 10px;
 
+    &:hover {
+      background-color: ${(props) =>
+        !props.color ? props.theme.backgroundSecondaryColor : ""};
+    }
+
     &:first-child {
       background-color: ${(props) =>
         props.color
           ? props.theme.backgroundPrimaryColor
           : props.theme.fontAccentColor};
+
+      &:hover {
+        background-color: ${(props) =>
+          props.color ? props.theme.backgroundSecondaryColor : ""};
+      }
     }
   }
 `;

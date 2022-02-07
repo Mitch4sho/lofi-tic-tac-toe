@@ -14,10 +14,10 @@ export const theme = {
   },
 
   button: {
-    primaryColor: "#65E9E4",
-    primaryColorActive: "#31C3BD",
-    secondaryColor: "#FFC860",
-    secondaryColorActive: "#F2B137",
+    primaryColor: "#31C3BD",
+    primaryColorActive: "#65E9E4",
+    secondaryColor: "#F2B137",
+    secondaryColorActive: "#FFC860",
     accentColor: "#DBE8ED",
     accentColorActive: "#A8BFC9",
   },
