@@ -26,14 +26,6 @@ function App() {
     losses: 0,
   });
 
-  useEffect(() => {
-    if (winner) {
-      window.alert("winner");
-    } else if (tie) {
-      window.alert("tie");
-    }
-  }, [winner, tie]);
-
   const updateSettings = (mode) => {
     setPlayerSettings({
       ...playerSettings,
@@ -70,6 +62,18 @@ function App() {
     const { state } = startNewGame(playerSettings);
     setGameState([...state.currentBoard]);
   };
+
+  useEffect(() => {
+    if (winner) {
+      window.alert("winner");
+    } else if (tie) {
+      window.alert("tie");
+    }
+  }, [winner, tie]);
+
+  useEffect(() => {
+    handleStartGame();
+  }, [playerSettings]);
 
   return (
     <ThemeProvider theme={theme}>

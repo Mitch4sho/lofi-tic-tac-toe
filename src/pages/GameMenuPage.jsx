@@ -5,15 +5,11 @@ import { GameMenuWrapper } from "../components/styles/GameMenuWrapper.styles";
 import { HeaderStyled } from "../components/styles/Header.styles";
 import { ButtonStyled } from "../components/styles/Button.styles";
 
-export default function GameMenuPage({
-  setPlayerSelection,
-  handleStartGame,
-  updateSettings,
-}) {
+export default function GameMenuPage({ setPlayerSelection, updateSettings }) {
   let navigate = useNavigate();
 
-  const handleNewGame = () => {
-    handleStartGame();
+  const handleNewGame = (gameMode) => {
+    updateSettings(gameMode);
     navigate("/game");
   };
 
@@ -21,13 +17,12 @@ export default function GameMenuPage({
     <GameMenuWrapper>
       <HeaderStyled />
       <PlayerSelectionStyled setPlayer={setPlayerSelection} />
-      <ButtonStyled onClick={() => updateSettings("CPU")}>
+      <ButtonStyled onClick={() => handleNewGame("CPU")}>
         NEW GAME (VS CPU)
       </ButtonStyled>
-      <ButtonStyled primary onClick={() => updateSettings("PLAYER")}>
+      <ButtonStyled primary onClick={() => handleNewGame("PLAYER")}>
         NEW GAME (VS PLAYER)
       </ButtonStyled>
-      <button onClick={handleNewGame}>Start Game</button>
     </GameMenuWrapper>
   );
 }
