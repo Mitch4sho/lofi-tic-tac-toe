@@ -100,6 +100,7 @@ function App() {
                   handleRestart={handleRestart}
                   playerScore={playerScore}
                   handleNextRound={handleNextRound}
+                  currentPlayer={currentPlayer}
                 />
               }
             />
