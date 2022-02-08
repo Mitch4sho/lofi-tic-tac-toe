@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Block from "../components/Block";
 import ScoreKeeper from "../components/ScoreKeeper";
+import { FancyModal } from "../components/FancyModal";
 import { SmallIconX } from "../components/icons/IconX";
 import { SmallIconO } from "../components/icons/IconO";
 import IconRestart from "../components/icons/IconRestart";
-import Modal from "../components/Modal";
 import { HeaderStyled } from "../components/styles/Header.styles";
 import { HeaderContainer } from "../components/styles/HeaderContainer.styles";
 import { PlayersTurnStyled } from "../components/styles/PlayersTurn.styles";
@@ -22,6 +21,8 @@ export default function GamePage({
   handleNextRound,
   currentPlayer,
   playerSettings,
+  winner,
+  tie,
 }) {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
@@ -62,7 +63,15 @@ export default function GamePage({
         })}
       </GameBoardContainer>
       <ScoreKeeper playerScore={playerScore} playerSettings={playerSettings} />
-      <Modal handleNextRound={nextRound} handleExit={restart} active={active} />
+      <FancyModal
+        handleNextRound={nextRound}
+        handleExit={restart}
+        active={active}
+        winner={winner}
+        tie={tie}
+        currentPlayer={currentPlayer}
+        playerSelection={playerSettings.playersPick}
+      />
     </GamePageWrapper>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { ModalProvider } from "styled-react-modal";
 import { startNewGame, boardUpdater, restartGame } from "./controller";
 import GameMenuPage from "./pages/GameMenuPage";
 import GamePage from "./pages/GamePage";
@@ -8,7 +9,6 @@ import { theme } from "./components/styles/Theme.styles";
 import GlobalStyles from "./components/styles/Global.styles";
 import { AppContainer } from "./components/styles/AppContainer.styles";
 import "./App.css";
-import IconO from "./components/icons/IconO";
 
 function App() {
   const [gameState, setGameState] = useState([]);
@@ -61,15 +61,8 @@ function App() {
   const handleNextRound = () => {
     const { state } = startNewGame(playerSettings);
     setGameState([...state.currentBoard]);
+    setWinner(false);
   };
-
-  useEffect(() => {
-    if (winner) {
-      window.alert("winner");
-    } else if (tie) {
-      window.alert("tie");
-    }
-  }, [winner, tie]);
 
   useEffect(() => {
     handleStartGame();
@@ -77,37 +70,41 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppContainer>
-        <GlobalStyles />
-        <Router>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <GameMenuPage
-                  setPlayerSelection={setPlayerSelection}
-                  handleStartGame={handleStartGame}
-                  updateSettings={updateSettings}
-                />
-              }
-            />
-            <Route
-              path="/game"
-              element={
-                <GamePage
-                  gameBoard={gameState}
-                  updateBoard={handleUpdate}
-                  handleRestart={handleRestart}
-                  playerScore={playerScore}
-                  handleNextRound={handleNextRound}
-                  currentPlayer={currentPlayer}
-                  playerSettings={playerSettings}
-                />
-              }
-            />
-          </Routes>
-        </Router>
-      </AppContainer>
+      <ModalProvider>
+        <AppContainer>
+          <GlobalStyles />
+          <Router>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <GameMenuPage
+                    setPlayerSelection={setPlayerSelection}
+                    handleStartGame={handleStartGame}
+                    updateSettings={updateSettings}
+                  />
+                }
+              />
+              <Route
+                path="/game"
+                element={
+                  <GamePage
+                    gameBoard={gameState}
+                    updateBoard={handleUpdate}
+                    handleRestart={handleRestart}
+                    playerScore={playerScore}
+                    handleNextRound={handleNextRound}
+                    currentPlayer={currentPlayer}
+                    playerSettings={playerSettings}
+                    winner={winner}
+                    tie={tie}
+                  />
+                }
+              />
+            </Routes>
+          </Router>
+        </AppContainer>
+      </ModalProvider>
     </ThemeProvider>
   );
 }
