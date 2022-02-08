@@ -10,6 +10,9 @@ import { HeaderStyled } from "../components/styles/Header.styles";
 import { HeaderContainer } from "../components/styles/HeaderContainer.styles";
 import { PlayersTurnStyled } from "../components/styles/PlayersTurn.styles";
 import { RestartButtonStyled } from "../components/styles/RestartButton.styles";
+import { BlockStyled } from "../components/styles/Block.styles";
+import { GameBoardContainer } from "../components/styles/GameBoardContainer.styles";
+import { GamePageWrapper } from "../components/styles/GamePageWrapper.styles";
 
 export default function GamePage({
   gameBoard,
@@ -18,6 +21,7 @@ export default function GamePage({
   playerScore,
   handleNextRound,
   currentPlayer,
+  playerSettings,
 }) {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +37,7 @@ export default function GamePage({
   };
 
   return (
-    <div className="game-page-container">
+    <GamePageWrapper>
       <HeaderContainer>
         <HeaderStyled />
         <PlayersTurnStyled>
@@ -45,10 +49,10 @@ export default function GamePage({
         </RestartButtonStyled>
       </HeaderContainer>
       <button onClick={() => setActive(true)}>Active modal</button>
-      <ul>
+      <GameBoardContainer>
         {gameBoard.map((content, id) => {
           return (
-            <Block
+            <BlockStyled
               key={id}
               id={id}
               content={content === 0 ? "" : content}
@@ -56,9 +60,9 @@ export default function GamePage({
             />
           );
         })}
-      </ul>
-      <ScoreKeeper playerScore={playerScore} />
+      </GameBoardContainer>
+      <ScoreKeeper playerScore={playerScore} playerSettings={playerSettings} />
       <Modal handleNextRound={nextRound} handleExit={restart} active={active} />
-    </div>
+    </GamePageWrapper>
   );
 }

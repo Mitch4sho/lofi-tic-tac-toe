@@ -101,6 +101,7 @@ function App() {
                   playerScore={playerScore}
                   handleNextRound={handleNextRound}
                   currentPlayer={currentPlayer}
+                  playerSettings={playerSettings}
                 />
               }
             />
