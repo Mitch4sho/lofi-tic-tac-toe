@@ -47,19 +47,17 @@ const StyledButton = styled.div`
 `;
 
 export function FancyModal({
-  active,
+  isOpen,
+  setIsOpen,
   handleExit,
   handleNextRound,
   winner,
   tie,
   currentPlayer,
   playerSelection,
+  setRestartSetting,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-  let winState = {
-    roundText: playerSelection !== currentPlayer ? "YOU LOST" : "YOU WON",
-    text: playerSelection !== currentPlayer ? "OH NO, YOU LOST..." : "YOU WON!",
-  };
+  const [winState, setWinState] = useState("YOU WON!");
 
   function toggleModal() {
     setIsOpen(!isOpen);
@@ -76,34 +74,76 @@ export function FancyModal({
   }
 
   useEffect(() => {
-    if (winner) toggleModal();
+    if (winner) {
+      setWinState(
+        playerSelection === currentPlayer ? "OH NO, YOU LOST..." : "YOU WON!"
+      );
+      toggleModal();
+    }
     if (tie) toggleModal();
   }, [winner, tie]);
 
   return (
     <div>
-      <button onClick={toggleModal}>Click me</button>
-      <StyledModal
-        isOpen={isOpen}
-        onBackgroundClick={toggleModal}
-        onEscapeKeydown={toggleModal}
-      >
-        <p>{winState.text}</p>
-        <Container>
-          {currentPlayer === "O" ? <MiniIconX /> : <MiniIconO />}
-          <StyledHeader color={currentPlayer === "O" ? "#31C3BD" : "#F2B137"}>
-            TAKES THE ROUND
-          </StyledHeader>
-        </Container>
-        <Container>
-          <StyledButton accent onClick={toggleExit}>
-            QUIT
-          </StyledButton>
-          <StyledButton secondary onClick={toggleNextRound}>
-            NEXT ROUND
-          </StyledButton>
-        </Container>
-      </StyledModal>
+      {winner ? (
+        <StyledModal
+          isOpen={isOpen}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+        >
+          <p>{winState}</p>
+          <Container>
+            {currentPlayer === "O" ? <MiniIconX /> : <MiniIconO />}
+            <StyledHeader color={currentPlayer === "O" ? "#31C3BD" : "#F2B137"}>
+              TAKES THE ROUND
+            </StyledHeader>
+          </Container>
+          <Container>
+            <StyledButton accent onClick={toggleExit}>
+              QUIT
+            </StyledButton>
+            <StyledButton secondary onClick={toggleNextRound}>
+              NEXT ROUND
+            </StyledButton>
+          </Container>
+        </StyledModal>
+      ) : tie ? (
+        <StyledModal
+          isOpen={isOpen}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+        >
+          <Container>
+            <StyledHeader color={"#A8BFC9"}>ROUND TIED</StyledHeader>
+          </Container>
+          <Container>
+            <StyledButton accent onClick={toggleExit}>
+              QUIT
+            </StyledButton>
+            <StyledButton secondary onClick={toggleNextRound}>
+              NEXT ROUND
+            </StyledButton>
+          </Container>
+        </StyledModal>
+      ) : (
+        <StyledModal
+          isOpen={isOpen}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+        >
+          <Container>
+            <StyledHeader color={"#A8BFC9"}>RESTART GAME?</StyledHeader>
+          </Container>
+          <Container>
+            <StyledButton accent onClick={() => setIsOpen(false)}>
+              NO, CANCEL
+            </StyledButton>
+            <StyledButton secondary onClick={() => setRestartSetting(true)}>
+              YES, RESTART
+            </StyledButton>
+          </Container>
+        </StyledModal>
+      )}
     </div>
   );
 }

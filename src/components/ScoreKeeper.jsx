@@ -4,8 +4,6 @@ import { CardContainer } from "./styles/CardContainer.styles";
 
 export default function ScoreKeeper({ playerScore, playerSettings }) {
   let playerMarkerSelection = playerSettings.playersPick;
-
-  console.log({ playerScore, playerSettings });
   return (
     <CardContainer>
       <CardStyled

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PlayersTurnStyled = styled.div`
   width: 96px;
   height: 40px;
+  margin-right: 26px;
   padding: 9px 10px;
   color: ${(props) => props.theme.fontAccentSecondaryColor};
   background-color: ${(props) => props.theme.backgroundSecondaryColor};

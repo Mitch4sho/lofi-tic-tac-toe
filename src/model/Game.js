@@ -21,6 +21,9 @@ export class Game {
     setGame(settings) {
         this.state.settings = settings;
         this.state.currentBoard = this.createGameBoard();
+        this.state.winner = false;
+        this.state.tie = false;
+        this.state.playerTurn = "X";
     }
 
     resetGame() {
@@ -77,7 +80,6 @@ export class Game {
             this.checkWinner(2, 5, 8) ||
             this.checkWinner(0, 4, 8) || // check for 3-in-a-row diagonally
             this.checkWinner(6, 4, 2);
-        console.log({ winner });
         if (tie) this.state.tie = tie;
         if (winner) this.state.winner = winner;
     }

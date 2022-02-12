@@ -7,3 +7,9 @@ export const GameBoardContainer = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 `;
+
+export const GameBoardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ScoreKeeper from "../components/ScoreKeeper";
 import { FancyModal } from "../components/FancyModal";
@@ -10,7 +10,10 @@ import { HeaderContainer } from "../components/styles/HeaderContainer.styles";
 import { PlayersTurnStyled } from "../components/styles/PlayersTurn.styles";
 import { RestartButtonStyled } from "../components/styles/RestartButton.styles";
 import { BlockStyled } from "../components/styles/Block.styles";
-import { GameBoardContainer } from "../components/styles/GameBoardContainer.styles";
+import {
+  GameBoardContainer,
+  GameBoardWrapper,
+} from "../components/styles/GameBoardContainer.styles";
 import { GamePageWrapper } from "../components/styles/GamePageWrapper.styles";
 
 export default function GamePage({
@@ -24,18 +27,25 @@ export default function GamePage({
   winner,
   tie,
 }) {
-  const [active, setActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [restartSetting, setRestartSetting] = useState(false);
   const navigate = useNavigate();
 
   const restart = () => {
-    navigate("/");
-    handleRestart();
+    setIsOpen(true);
   };
 
   const nextRound = () => {
     handleNextRound();
-    setActive(false);
   };
+
+  useEffect(() => {
+    if (restartSetting) {
+      navigate("/");
+      handleRestart();
+      setRestartSetting(false);
+    }
+  }, [restartSetting]);
 
   return (
     <GamePageWrapper>
@@ -49,26 +59,32 @@ export default function GamePage({
           <IconRestart />
         </RestartButtonStyled>
       </HeaderContainer>
-      <button onClick={() => setActive(true)}>Active modal</button>
-      <GameBoardContainer>
-        {gameBoard.map((content, id) => {
-          return (
-            <BlockStyled
-              key={id}
-              id={id}
-              content={content === 0 ? "" : content}
-              updateBoard={updateBoard}
-            />
-          );
-        })}
-      </GameBoardContainer>
-      <ScoreKeeper playerScore={playerScore} playerSettings={playerSettings} />
+      <GameBoardWrapper>
+        <GameBoardContainer>
+          {gameBoard.map((content, id) => {
+            return (
+              <BlockStyled
+                key={id}
+                id={id}
+                content={content === 0 ? "" : content}
+                updateBoard={updateBoard}
+              />
+            );
+          })}
+        </GameBoardContainer>
+        <ScoreKeeper
+          playerScore={playerScore}
+          playerSettings={playerSettings}
+        />
+      </GameBoardWrapper>
       <FancyModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
         handleNextRound={nextRound}
         handleExit={restart}
-        active={active}
         winner={winner}
         tie={tie}
+        setRestartSetting={setRestartSetting}
         currentPlayer={currentPlayer}
         playerSelection={playerSettings.playersPick}
       />

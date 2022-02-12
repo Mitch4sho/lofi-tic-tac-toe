@@ -35,7 +35,6 @@ function App() {
   };
 
   const handleUpdate = (id) => {
-    console.log("updating the board", { id });
     let newGameState = boardUpdater(id);
 
     if (newGameState.winner) setWinner(newGameState.winner);
@@ -62,6 +61,8 @@ function App() {
     const { state } = startNewGame(playerSettings);
     setGameState([...state.currentBoard]);
     setWinner(false);
+    setTie(false);
+    setCurrentPlayer("X");
   };
 
   useEffect(() => {
