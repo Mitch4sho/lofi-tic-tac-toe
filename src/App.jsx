@@ -5,6 +5,7 @@ import { ModalProvider } from "styled-react-modal";
 import { startNewGame, boardUpdater, restartGame } from "./controller";
 import GameMenuPage from "./pages/GameMenuPage";
 import GamePage from "./pages/GamePage";
+import { AudioButtonStyled } from "./components/AudioComponent/AudioButton.styles";
 import { theme } from "./components/styles/Theme.styles";
 import GlobalStyles from "./components/styles/Global.styles";
 import { AppContainer } from "./components/styles/AppContainer.styles";
@@ -74,6 +75,7 @@ function App() {
       <ModalProvider>
         <AppContainer>
           <GlobalStyles />
+          <AudioButtonStyled />
           <Router>
             <Routes>
               <Route
