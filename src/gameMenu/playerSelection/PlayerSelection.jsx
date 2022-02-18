@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { SelectionContainer } from "./styles/PlayerSelectionStyled.styles";
-import { MiniIconO } from "./icons/IconO";
-import { MiniIconX } from "./icons/IconX";
+import { SelectionContainer } from "./PlayerSelectionStyled.styles";
+import { MiniIconO } from "../../shared/Icons/IconO";
+import { MiniIconX } from "../../shared/Icons/IconX";
 
 export default function PlayerSelection({ className, setPlayer }) {
   const [color, setColor] = useState(true);

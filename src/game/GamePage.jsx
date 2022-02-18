@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ScoreKeeper from "../components/ScoreKeeper";
-import { FancyModal } from "../components/FancyModal";
-import { SmallIconX } from "../components/icons/IconX";
-import { SmallIconO } from "../components/icons/IconO";
-import IconRestart from "../components/icons/IconRestart";
-import { HeaderStyled } from "../components/styles/Header.styles";
-import { HeaderContainer } from "../components/styles/HeaderContainer.styles";
-import { PlayersTurnStyled } from "../components/styles/PlayersTurn.styles";
-import { RestartButtonStyled } from "../components/styles/RestartButton.styles";
-import { BlockStyled } from "../components/styles/Block.styles";
+import ScoreKeeper from "./scoreKeeper/ScoreKeeper";
+import { FancyModal } from "./FancyModal";
+import { SmallIconX } from "../shared/Icons/IconX";
+import { SmallIconO } from "../shared/Icons/IconO";
+import IconRestart from "../shared/Icons/IconRestart";
+import { HeaderStyled } from "../shared/Header.styles";
+import { HeaderContainer } from "./header/HeaderContainer.styles";
+import { PlayersTurnStyled } from "./header/PlayersTurn.styles";
+import { RestartButtonStyled } from "./header/RestartButton.styles";
+import { BlockStyled } from "./gameBoard/Block.styles";
 import {
   GameBoardContainer,
   GameBoardWrapper,
-} from "../components/styles/GameBoardContainer.styles";
-import { GamePageWrapper } from "../components/styles/GamePageWrapper.styles";
+} from "./gameBoard/GameBoardContainer.styles";
+import { GamePageWrapper } from "./GamePageWrapper.styles";
 
 export default function GamePage({
   gameBoard,

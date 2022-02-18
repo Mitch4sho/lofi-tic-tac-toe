@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PlayerSelectionStyled } from "../components/styles/PlayerSelectionStyled.styles";
-import { GameMenuWrapper } from "../components/styles/GameMenuWrapper.styles";
-import { HeaderStyled } from "../components/styles/Header.styles";
-import { ButtonStyled } from "../components/styles/Button.styles";
+import { PlayerSelectionStyled } from "./playerSelection/PlayerSelectionStyled.styles";
+import { GameMenuWrapper } from "./GameMenuWrapper.styles";
+import { HeaderStyled } from "../shared/Header.styles";
+import { ButtonStyled } from "./Button.styles";
 
 export default function GameMenuPage({ setPlayerSelection, updateSettings }) {
   let navigate = useNavigate();

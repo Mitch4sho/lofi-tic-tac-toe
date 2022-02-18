@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "styled-react-modal";
-import { MiniIconO } from "./icons/IconO";
-import { MiniIconX } from "./icons/IconX";
+import { MiniIconO } from "../shared/Icons/IconO";
+import { MiniIconX } from "../shared/Icons/IconX";
 
 const StyledModal = Modal.styled`
   width: 100%;

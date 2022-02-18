@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { ModalProvider } from "styled-react-modal";
 import { startNewGame, boardUpdater, restartGame } from "./controller";
-import GameMenuPage from "./pages/GameMenuPage";
-import GamePage from "./pages/GamePage";
-import { AudioButtonStyled } from "./components/AudioComponent/AudioButton.styles";
-import { theme } from "./components/styles/Theme.styles";
-import GlobalStyles from "./components/styles/Global.styles";
-import { AppContainer } from "./components/styles/AppContainer.styles";
+import GameMenuPage from "./gameMenu/GameMenuPage";
+import GamePage from "./game/GamePage";
+import {AudioButtonStyled} from './shared/AudioComponent/AudioButton.styles';
+import { theme } from "./Theme.styles";
+import GlobalStyles from "./Global.styles";
+import {AppContainer} from "./AppContainer.styles";
 import "./App.css";
 
 function App() {

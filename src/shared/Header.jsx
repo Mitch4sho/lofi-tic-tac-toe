@@ -1,6 +1,6 @@
 import React from "react";
-import { MiniIconO } from "./icons/IconO";
-import { MiniIconX } from "./icons/IconX";
+import { MiniIconO } from "./Icons/IconO";
+import { MiniIconX } from "./Icons/IconX";
 
 export default function Header({ className }) {
   return (

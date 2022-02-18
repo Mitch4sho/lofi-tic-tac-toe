@@ -1,6 +1,6 @@
 import React from "react";
-import { CardStyled } from "./styles/Card.styles";
-import { CardContainer } from "./styles/CardContainer.styles";
+import { CardStyled } from "./Card.styles";
+import { CardContainer } from "./CardContainer.styles";
 
 export default function ScoreKeeper({ playerScore, playerSettings }) {
   let playerMarkerSelection = playerSettings.playersPick;

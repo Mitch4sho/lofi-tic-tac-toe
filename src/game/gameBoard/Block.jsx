@@ -1,6 +1,6 @@
 import React from "react";
-import { IconO } from "./icons/IconO";
-import { IconX } from "./icons/IconX";
+import { IconO } from "../../shared/Icons/IconO";
+import { IconX } from "../../shared/Icons/IconX";
 
 export default function Block({ content, id, updateBoard, className }) {
   return (

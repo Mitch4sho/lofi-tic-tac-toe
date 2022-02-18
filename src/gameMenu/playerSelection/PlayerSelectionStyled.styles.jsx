@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PlayerSelection from "../PlayerSelection";
+import PlayerSelection from "./PlayerSelection";
 
 export const PlayerSelectionStyled = styled(PlayerSelection)`
   background-color: ${(props) => props.theme.backgroundSecondaryColor};

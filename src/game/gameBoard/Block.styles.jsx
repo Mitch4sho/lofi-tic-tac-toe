@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Block from "../Block";
+import Block from "./Block";
 
 export const BlockStyled = styled(Block)`
   width: 96px;
