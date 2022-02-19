@@ -51,11 +51,9 @@ export function FancyModal({
   setIsOpen,
   handleExit,
   handleNextRound,
-  winner,
-  tie,
-  currentPlayer,
   playerSelection,
   setRestartSetting,
+  gameState,
 }) {
   const [winState, setWinState] = useState("YOU WON!");
 
@@ -74,18 +72,20 @@ export function FancyModal({
   }
 
   useEffect(() => {
-    if (winner) {
+    if (gameState.winner) {
       setWinState(
-        playerSelection === currentPlayer ? "OH NO, YOU LOST..." : "YOU WON!"
+        playerSelection === gameState.currentPlayer
+          ? "OH NO, YOU LOST..."
+          : "YOU WON!"
       );
       toggleModal();
     }
-    if (tie) toggleModal();
-  }, [winner, tie]);
+    if (gameState.tie) toggleModal();
+  }, [gameState.winner, gameState.tie]);
 
   return (
     <div>
-      {winner ? (
+      {gameState.winner ? (
         <StyledModal
           isOpen={isOpen}
           onBackgroundClick={toggleModal}
@@ -93,8 +93,10 @@ export function FancyModal({
         >
           <p>{winState}</p>
           <Container>
-            {currentPlayer === "O" ? <MiniIconX /> : <MiniIconO />}
-            <StyledHeader color={currentPlayer === "O" ? "#31C3BD" : "#F2B137"}>
+            {gameState.currentPlayer === "O" ? <MiniIconX /> : <MiniIconO />}
+            <StyledHeader
+              color={gameState.currentPlayer === "O" ? "#31C3BD" : "#F2B137"}
+            >
               TAKES THE ROUND
             </StyledHeader>
           </Container>
@@ -107,7 +109,7 @@ export function FancyModal({
             </StyledButton>
           </Container>
         </StyledModal>
-      ) : tie ? (
+      ) : gameState.tie ? (
         <StyledModal
           isOpen={isOpen}
           onBackgroundClick={toggleModal}

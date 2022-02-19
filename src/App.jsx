@@ -5,18 +5,23 @@ import { ModalProvider } from "styled-react-modal";
 import { startNewGame, boardUpdater, restartGame } from "./controller";
 import GameMenuPage from "./gameMenu/GameMenuPage";
 import GamePage from "./game/GamePage";
-import {AudioButtonStyled} from './shared/AudioComponent/AudioButton.styles';
+import { AudioButtonStyled } from "./shared/AudioComponent/AudioButton.styles";
 import { theme } from "./Theme.styles";
 import GlobalStyles from "./Global.styles";
-import {AppContainer} from "./AppContainer.styles";
+import { AppContainer } from "./AppContainer.styles";
 import "./App.css";
 
 function App() {
+  const [state, setState] = useState({
+    boardState: [],
+    winner: false,
+    tie: false,
+    currentPlayer: "X",
+  });
   const [gameState, setGameState] = useState([]);
   const [winner, setWinner] = useState(false);
   const [tie, setTie] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState("X");
-  const [playerSelection, setPlayerSelection] = useState("");
   const [playerSettings, setPlayerSettings] = useState({
     playersPick: "",
     gameMode: "",
@@ -27,48 +32,82 @@ function App() {
     losses: 0,
   });
 
-  const updateSettings = (mode) => {
+  const updateSettings = (gameMode, selection = playerSettings.playersPick) => {
     setPlayerSettings({
       ...playerSettings,
-      playersPick: playerSelection,
-      gameMode: mode,
+      playersPick: selection,
     });
+
+    if (gameMode) {
+      setPlayerSettings({
+        ...playerSettings,
+        playersPick: selection,
+        gameMode: gameMode,
+      });
+    }
   };
 
   const handleUpdate = (id) => {
     let newGameState = boardUpdater(id);
+    setState({
+      ...state,
+      boardState: [...newGameState.currentBoard],
+      winner: newGameState.winner,
+      tie: newGameState.tie,
+      currentPlayer: newGameState.playerTurn,
+    });
 
-    if (newGameState.winner) setWinner(newGameState.winner);
-    if (newGameState.tie) setTie(newGameState.tie);
+    // if (newGameState.winner) setWinner(newGameState.winner);
+    // if (newGameState.tie) setTie(newGameState.tie);
 
-    setCurrentPlayer(newGameState.playerTurn);
-    setGameState([...newGameState.currentBoard]);
+    // setCurrentPlayer(newGameState.playerTurn);
+    // setGameState([...newGameState.currentBoard]);
   };
 
   const handleRestart = () => {
     restartGame();
-    setGameState([]);
-    setWinner(false);
-    setTie(false);
+    setState({
+      boardState: [],
+      winner: false,
+      tie: false,
+      currentPlayer: "X",
+      playerSelection: "",
+    });
+    // setGameState([]);
+    // setWinner(false);
+    // setTie(false);
   };
 
   const handleStartGame = () => {
     const { state, playerInfo } = startNewGame(playerSettings);
-    setGameState([...state.currentBoard]);
+    setState({
+      ...state,
+      boardState: [...state.currentBoard],
+    });
+    // setGameState([...state.currentBoard]);
+    // FIXME: the state is not being set right needs to update only players new score, we need to update each win loss and tie state
     setPlayerScore({ ...playerScore, ...playerInfo.playerScore });
   };
 
+  // start the next round with player default settings
   const handleNextRound = () => {
     const { state } = startNewGame(playerSettings);
-    setGameState([...state.currentBoard]);
-    setWinner(false);
-    setTie(false);
-    setCurrentPlayer("X");
+    setState({
+      ...state,
+      boardState: [...state.currentBoard],
+      winner: false,
+      tie: false,
+      setCurrentPlayer: "X",
+    });
+    // setGameState([...state.currentBoard]);
+    // setWinner(false);
+    // setTie(false);
+    // setCurrentPlayer("X");
   };
 
   useEffect(() => {
     handleStartGame();
-  }, [playerSettings]);
+  }, [playerSettings.gameMode]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -80,27 +119,18 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <GameMenuPage
-                    setPlayerSelection={setPlayerSelection}
-                    handleStartGame={handleStartGame}
-                    updateSettings={updateSettings}
-                  />
-                }
+                element={<GameMenuPage updateSettings={updateSettings} />}
               />
               <Route
                 path="/game"
                 element={
                   <GamePage
-                    gameBoard={gameState}
+                    gameState={state}
                     updateBoard={handleUpdate}
                     handleRestart={handleRestart}
                     playerScore={playerScore}
                     handleNextRound={handleNextRound}
-                    currentPlayer={currentPlayer}
                     playerSettings={playerSettings}
-                    winner={winner}
-                    tie={tie}
                   />
                 }
               />

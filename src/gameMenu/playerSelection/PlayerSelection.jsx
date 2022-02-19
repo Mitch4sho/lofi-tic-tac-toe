@@ -3,10 +3,11 @@ import { SelectionContainer } from "./PlayerSelectionStyled.styles";
 import { MiniIconO } from "../../shared/Icons/IconO";
 import { MiniIconX } from "../../shared/Icons/IconX";
 
-export default function PlayerSelection({ className, setPlayer }) {
+export default function PlayerSelection({ className, updateSettings }) {
   const [color, setColor] = useState(true);
+
   const handlePlayerChange = (value) => {
-    setPlayer(value);
+    updateSettings(null, value);
     setColor((state) => (state ? false : true));
   };
 

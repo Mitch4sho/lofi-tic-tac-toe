@@ -17,15 +17,12 @@ import {
 import { GamePageWrapper } from "./GamePageWrapper.styles";
 
 export default function GamePage({
-  gameBoard,
   updateBoard,
   handleRestart,
   playerScore,
   handleNextRound,
-  currentPlayer,
   playerSettings,
-  winner,
-  tie,
+  gameState,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [restartSetting, setRestartSetting] = useState(false);
@@ -47,12 +44,13 @@ export default function GamePage({
     }
   }, [restartSetting]);
 
+  console.log(gameState);
   return (
     <GamePageWrapper>
       <HeaderContainer>
         <HeaderStyled />
         <PlayersTurnStyled>
-          {currentPlayer === "X" ? <SmallIconX /> : <SmallIconO />}
+          {gameState.currentPlayer === "X" ? <SmallIconX /> : <SmallIconO />}
           TURN
         </PlayersTurnStyled>
         <RestartButtonStyled onClick={restart}>
@@ -61,7 +59,7 @@ export default function GamePage({
       </HeaderContainer>
       <GameBoardWrapper>
         <GameBoardContainer>
-          {gameBoard.map((content, id) => {
+          {gameState.boardState.map((content, id) => {
             return (
               <BlockStyled
                 key={id}
@@ -82,11 +80,9 @@ export default function GamePage({
         setIsOpen={setIsOpen}
         handleNextRound={nextRound}
         handleExit={restart}
-        winner={winner}
-        tie={tie}
         setRestartSetting={setRestartSetting}
-        currentPlayer={currentPlayer}
         playerSelection={playerSettings.playersPick}
+        gameState={gameState}
       />
     </GamePageWrapper>
   );

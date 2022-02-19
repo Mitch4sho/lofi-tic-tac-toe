@@ -5,7 +5,7 @@ import { GameMenuWrapper } from "./GameMenuWrapper.styles";
 import { HeaderStyled } from "../shared/Header.styles";
 import { ButtonStyled } from "./Button.styles";
 
-export default function GameMenuPage({ setPlayerSelection, updateSettings }) {
+export default function GameMenuPage({ updateSettings }) {
   let navigate = useNavigate();
 
   const handleNewGame = (gameMode) => {
@@ -16,7 +16,7 @@ export default function GameMenuPage({ setPlayerSelection, updateSettings }) {
   return (
     <GameMenuWrapper>
       <HeaderStyled />
-      <PlayerSelectionStyled setPlayer={setPlayerSelection} />
+      <PlayerSelectionStyled updateSettings={updateSettings} />
       <ButtonStyled onClick={() => handleNewGame("CPU")}>
         NEW GAME (VS CPU)
       </ButtonStyled>
