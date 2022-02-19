@@ -12,16 +12,12 @@ import { AppContainer } from "./AppContainer.styles";
 import "./App.css";
 
 function App() {
-  const [state, setState] = useState({
+  const [gameState, setGameState] = useState({
     boardState: [],
     winner: false,
     tie: false,
     currentPlayer: "X",
   });
-  const [gameState, setGameState] = useState([]);
-  const [winner, setWinner] = useState(false);
-  const [tie, setTie] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState("X");
   const [playerSettings, setPlayerSettings] = useState({
     playersPick: "",
     gameMode: "",
@@ -48,66 +44,61 @@ function App() {
   };
 
   const handleUpdate = (id) => {
-    let newGameState = boardUpdater(id);
-    setState({
-      ...state,
-      boardState: [...newGameState.currentBoard],
-      winner: newGameState.winner,
-      tie: newGameState.tie,
-      currentPlayer: newGameState.playerTurn,
+    let {currentBoard, winner, tie, playerTurn} = boardUpdater(id);
+    setGameState({
+      ...gameState,
+      boardState: currentBoard,
+      winner: winner,
+      tie: tie,
+      currentPlayer: playerTurn,
     });
-
-    // if (newGameState.winner) setWinner(newGameState.winner);
-    // if (newGameState.tie) setTie(newGameState.tie);
-
-    // setCurrentPlayer(newGameState.playerTurn);
-    // setGameState([...newGameState.currentBoard]);
   };
 
   const handleRestart = () => {
     restartGame();
-    setState({
+    setGameState({
       boardState: [],
       winner: false,
       tie: false,
       currentPlayer: "X",
       playerSelection: "",
     });
-    // setGameState([]);
-    // setWinner(false);
-    // setTie(false);
+
+    setPlayerSettings({
+      playersPick: "",
+      gameMode: "",
+    })
   };
 
   const handleStartGame = () => {
+    console.log('starting game')
     const { state, playerInfo } = startNewGame(playerSettings);
-    setState({
-      ...state,
-      boardState: [...state.currentBoard],
+    
+    setGameState({
+      ...gameState,
+      boardState: state.currentBoard,
     });
-    // setGameState([...state.currentBoard]);
     // FIXME: the state is not being set right needs to update only players new score, we need to update each win loss and tie state
-    setPlayerScore({ ...playerScore, ...playerInfo.playerScore });
+    setPlayerScore({ ...playerInfo.playerScore });
   };
 
   // start the next round with player default settings
   const handleNextRound = () => {
     const { state } = startNewGame(playerSettings);
-    setState({
-      ...state,
-      boardState: [...state.currentBoard],
+    setGameState({
+      ...gameState,
+      boardState: state.currentBoard,
       winner: false,
       tie: false,
       setCurrentPlayer: "X",
     });
-    // setGameState([...state.currentBoard]);
-    // setWinner(false);
-    // setTie(false);
-    // setCurrentPlayer("X");
   };
 
   useEffect(() => {
-    handleStartGame();
+    if (playerSettings.gameMode) handleStartGame();
   }, [playerSettings.gameMode]);
+
+  console.log({state: gameState});
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,7 +116,7 @@ function App() {
                 path="/game"
                 element={
                   <GamePage
-                    gameState={state}
+                    gameState={gameState}
                     updateBoard={handleUpdate}
                     handleRestart={handleRestart}
                     playerScore={playerScore}

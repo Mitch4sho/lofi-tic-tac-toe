@@ -4,7 +4,9 @@ let gameState = new Game();
 
 export function startNewGame(settings) {
     gameState.setGame(settings);
-    return gameState;
+    const state = gameState.state;
+    const playerInfo = gameState.playerInfo;
+    return {state, playerInfo};
 }
 
 export function boardUpdater(idx) {
