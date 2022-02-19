@@ -44,7 +44,7 @@ export default function GamePage({
     }
   }, [restartSetting]);
 
-  console.log(gameState);
+  // console.log(gameState);
   return (
     <GamePageWrapper>
       <HeaderContainer>
