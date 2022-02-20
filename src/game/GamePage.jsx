@@ -25,11 +25,13 @@ export default function GamePage({
   gameState,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [restartSetting, setRestartSetting] = useState(false); 
+  const [restartSetting, setRestartSetting] = useState(false);
   const navigate = useNavigate();
 
   const restart = () => {
     setIsOpen(true);
+    handleRestart();
+    navigate("/");
   };
 
   const nextRound = () => {
@@ -43,7 +45,7 @@ export default function GamePage({
       setRestartSetting(false);
     }
   }, [restartSetting]);
-  
+
   return (
     <GamePageWrapper>
       <HeaderContainer>
