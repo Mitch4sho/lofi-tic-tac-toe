@@ -5,21 +5,25 @@ export class Game {
             playerTurn: "X",
             winner: false,
             tie: false,
-            settings: {},
         };
 
         this.playerInfo = {
-            playerName: "",
-            playerScore: {
-                wins: 0,
-                ties: 0,
-                losses: 0,
-            },
+            playerName: "",  
+        };
+
+        this.playerScore ={
+            wins: 0,
+            ties: 0,
+            losses: 0,
+        };
+
+        this.settings = {
+            playerPick: "",
+            gameMode: "",
         };
     }
 
-    setGame(settings) {
-        this.state.settings = settings;
+    setGame() {
         this.state.currentBoard = this.createGameBoard();
         this.state.winner = false;
         this.state.tie = false;
@@ -31,7 +35,10 @@ export class Game {
         this.state.playerTurn = "X";
         this.state.winner = false;
         this.state.tie = false;
-        this.state.settings = {};
+        this.settings = {
+            playerPick: "",
+            gameMode: "",
+        };
     }
 
     createGameBoard() {
@@ -80,7 +87,21 @@ export class Game {
             this.checkWinner(2, 5, 8) ||
             this.checkWinner(0, 4, 8) || // check for 3-in-a-row diagonally
             this.checkWinner(6, 4, 2);
+        
         if (tie) this.state.tie = tie;
         if (winner) this.state.winner = winner;
+
+    }
+
+    updateWinnings() {
+        this.playerScore.wins += 1;
+    }
+
+    updateLosses() {
+        this.playerScore.losses += 1;
+    }
+
+    updateTies() {
+        this.playerScore.ties += 1;
     }
 }

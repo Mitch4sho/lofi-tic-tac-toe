@@ -44,7 +44,9 @@ function App() {
   };
 
   const handleUpdate = (id) => {
-    let {currentBoard, winner, tie, playerTurn} = boardUpdater(id);
+    let {state, playerScore} = boardUpdater(id);
+    let {currentBoard, winner, tie, playerTurn} = state;
+
     setGameState({
       ...gameState,
       boardState: currentBoard,
@@ -52,6 +54,8 @@ function App() {
       tie: tie,
       currentPlayer: playerTurn,
     });
+
+    setPlayerScore(playerScore);
   };
 
   const handleRestart = () => {
@@ -71,15 +75,14 @@ function App() {
   };
 
   const handleStartGame = () => {
-    console.log('starting game')
-    const { state, playerInfo } = startNewGame(playerSettings);
+    const { state, playerInfo, playerScore } = startNewGame(playerSettings);
     
     setGameState({
       ...gameState,
       boardState: state.currentBoard,
     });
     // FIXME: the state is not being set right needs to update only players new score, we need to update each win loss and tie state
-    setPlayerScore({ ...playerInfo.playerScore });
+    setPlayerScore(playerScore);
   };
 
   // start the next round with player default settings
@@ -97,8 +100,6 @@ function App() {
   useEffect(() => {
     if (playerSettings.gameMode) handleStartGame();
   }, [playerSettings.gameMode]);
-
-  console.log({state: gameState});
 
   return (
     <ThemeProvider theme={theme}>

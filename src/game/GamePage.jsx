@@ -25,7 +25,7 @@ export default function GamePage({
   gameState,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [restartSetting, setRestartSetting] = useState(false);
+  const [restartSetting, setRestartSetting] = useState(false); 
   const navigate = useNavigate();
 
   const restart = () => {
@@ -43,8 +43,7 @@ export default function GamePage({
       setRestartSetting(false);
     }
   }, [restartSetting]);
-
-  // console.log(gameState);
+  
   return (
     <GamePageWrapper>
       <HeaderContainer>

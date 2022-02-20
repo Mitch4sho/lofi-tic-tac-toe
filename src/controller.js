@@ -3,10 +3,12 @@ import { Game } from "./model/Game";
 let gameState = new Game();
 
 export function startNewGame(settings) {
-    gameState.setGame(settings);
+    gameState.setGame();
+    gameState.settings = settings;
     const state = gameState.state;
     const playerInfo = gameState.playerInfo;
-    return {state, playerInfo};
+    const playerScore = gameState.playerScore;
+    return {state, playerInfo, playerScore};
 }
 
 export function boardUpdater(idx) {
@@ -17,8 +19,21 @@ export function boardUpdater(idx) {
         gameState.update(idx, player);
         gameState.checkState();
     }
+    console.log('updating',{gameState})
 
-    return gameState.state;
+    if (gameState.state.winner) {
+        if (gameState.state.playerTurn !== gameState.settings.playersPick) {
+            gameState.updateWinnings();
+        } else {
+            gameState.updateLosses();
+        }
+    }
+
+    if (gameState.state.tie) {
+        gameState.updateTies();
+    }
+
+    return gameState;
 }
 
 export function restartGame() {
