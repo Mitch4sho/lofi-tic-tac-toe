@@ -5,7 +5,7 @@ import { ModalProvider } from "styled-react-modal";
 import { startNewGame, boardUpdater, restartGame } from "./controller";
 import GameMenuPage from "./gameMenu/GameMenuPage";
 import GamePage from "./game/GamePage";
-import { AudioButtonStyled } from "./shared/AudioComponent/AudioButton.styles";
+import { AudioStyled } from "./shared/AudioComponent/Audio.styles";
 import { theme } from "./Theme.styles";
 import GlobalStyles from "./Global.styles";
 import { AppContainer } from "./AppContainer.styles";
@@ -44,8 +44,8 @@ function App() {
   };
 
   const handleUpdate = (id) => {
-    let {state, playerScore} = boardUpdater(id);
-    let {currentBoard, winner, tie, playerTurn} = state;
+    let { state, playerScore } = boardUpdater(id);
+    let { currentBoard, winner, tie, playerTurn } = state;
 
     setGameState({
       ...gameState,
@@ -71,18 +71,19 @@ function App() {
     setPlayerSettings({
       playersPick: "",
       gameMode: "",
-    })
+    });
   };
 
   const handleStartGame = () => {
     const { state, playerInfo, playerScore } = startNewGame(playerSettings);
-    
+
     setGameState({
       ...gameState,
       boardState: state.currentBoard,
     });
     // FIXME: the state is not being set right needs to update only players new score, we need to update each win loss and tie state
     setPlayerScore(playerScore);
+    setPlayerSettings(playerInfo);
   };
 
   // start the next round with player default settings
@@ -106,7 +107,6 @@ function App() {
       <ModalProvider>
         <AppContainer>
           <GlobalStyles />
-          <AudioButtonStyled />
           <Router>
             <Routes>
               <Route
@@ -128,6 +128,7 @@ function App() {
               />
             </Routes>
           </Router>
+          <AudioStyled />
         </AppContainer>
       </ModalProvider>
     </ThemeProvider>

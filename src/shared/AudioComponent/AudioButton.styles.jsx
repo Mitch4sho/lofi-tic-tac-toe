@@ -16,5 +16,6 @@ export const AudioButtonStyled = styled(AudioButton)`
   .play {
     position: relative;
     left: 2px;
+    color: ${(props) => props.theme.backgroundPrimaryColor};
   }
 `;
