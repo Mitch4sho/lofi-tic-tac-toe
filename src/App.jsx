@@ -28,10 +28,11 @@ function App() {
     losses: 0,
   });
 
-  const updateSettings = (gameMode, selection = playerSettings.playersPick) => {
+  const updateSettings = (gameMode, selection = "X", aiSelection = "O") => {
     setPlayerSettings({
       ...playerSettings,
       playersPick: selection,
+      aiPlayer: aiSelection,
     });
 
     if (gameMode) {
