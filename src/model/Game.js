@@ -38,6 +38,7 @@ export class Game {
     this.state.tie = false;
     this.settings = {
       playerPick: "",
+      aiPlayer: "",
       gameMode: "",
     };
   }

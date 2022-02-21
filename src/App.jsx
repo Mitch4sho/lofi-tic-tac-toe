@@ -21,6 +21,7 @@ function App() {
   const [playerSettings, setPlayerSettings] = useState({
     playersPick: "",
     gameMode: "",
+    aiPlayer: "",
   });
   const [playerScore, setPlayerScore] = useState({
     wins: 0,
@@ -76,15 +77,15 @@ function App() {
   };
 
   const handleStartGame = () => {
-    const { state, playerInfo, playerScore } = startNewGame(playerSettings);
+    const { newState, newSettings, newScore } = startNewGame(playerSettings);
 
     setGameState({
       ...gameState,
-      boardState: state.currentBoard,
+      boardState: newState.currentBoard,
     });
     // FIXME: the state is not being set right needs to update only players new score, we need to update each win loss and tie state
-    setPlayerScore(playerScore);
-    setPlayerSettings(playerInfo);
+    setPlayerScore(newScore);
+    setPlayerSettings(newSettings);
   };
 
   // start the next round with player default settings

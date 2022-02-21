@@ -6,7 +6,6 @@ let gameState = new Game();
 export function startNewGame(settings) {
   gameState.setGame();
   gameState.settings = settings;
-
   // see what kind of game play it is and see if CPU needs to make the first move
   if (
     gameState.settings.gameMode === "CPU" &&
@@ -15,11 +14,11 @@ export function startNewGame(settings) {
     // computerMoves();
   }
 
-  const state = gameState.state;
-  const playerInfo = gameState.playerInfo;
-  const playerScore = gameState.playerScore;
+  const newState = gameState.state;
+  const newSettings = gameState.settings;
+  const newScore = gameState.playerScore;
 
-  return { state, playerInfo, playerScore };
+  return { newState, newSettings, newScore };
 }
 
 export function boardUpdater(idx) {
