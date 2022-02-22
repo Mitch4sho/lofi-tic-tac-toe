@@ -7,13 +7,11 @@ export function startNewGame(settings) {
   gameState.setGame();
   gameState.settings = settings;
   // see what kind of game play it is and see if CPU needs to make the first move
-  if (
-    gameState.settings.gameMode === "CPU" &&
-    gameState.settings.playerPick === "O"
-  ) {
-    // computerMoves();
-  }
 
+  if (gameState.settings.aiPlayer === gameState.state.playerTurn) {
+    console.log("computer moves");
+    computerMoves();
+  }
   const newState = gameState.state;
   const newSettings = gameState.settings;
   const newScore = gameState.playerScore;
@@ -22,32 +20,18 @@ export function startNewGame(settings) {
 }
 
 export function boardUpdater(idx) {
-  let validMove = gameState.checkValidMove(idx);
-  console.log({ validMove });
-  let player = gameState.state.playerTurn;
+  // TODO: Need to update so the change of each players turn is not that fast may be return objects to see if a player has one
+  playerMoves(idx);
 
-  if (validMove) {
-    gameState.update(idx, player);
-    gameState.checkState();
-  }
-  console.log("updating", { gameState });
-
-  if (gameState.state.winner) {
-    if (gameState.state.playerTurn !== gameState.settings.playersPick) {
-      gameState.updateWinnings();
-    } else {
-      gameState.updateLosses();
-    }
+  if (gameState.settings.aiPlayer === gameState.state.playerTurn) {
+    computerMoves();
   }
 
   if (gameState.state.tie) {
     gameState.updateTies();
   }
 
-  if (gameState.state.playerTurn === gameState.settings.aiPlayer) {
-    computerMoves();
-  }
-
+  console.log("updating", { gameState });
   return gameState;
 }
 
@@ -56,12 +40,35 @@ export function restartGame() {
   return gameState.state.currentBoard;
 }
 
-function computerMoves() {
-  console.log("computer turn");
-  let aiMove = aiMoves(
-    gameState.state.currentBoard,
-    gameState.settings.playerPick,
-    gameState.settings.aiPlayer
-  );
-  gameState.update(aiMove.index, gameState.settings.aiPlayer);
+function playerMoves(idx) {
+  const validMove = gameState.checkValidMove(idx);
+  const player = gameState.state.playerTurn;
+  console.log("players turn", { player });
+
+  if (validMove) {
+    gameState.update(idx, player);
+    gameState.checkState();
+    if (gameState.state.winner && !gameState.state.won) {
+      gameState.updateWinner(player);
+      gameState.updateWinnings();
+    }
+  }
+}
+
+export function computerMoves() {
+  const aiPlayer = gameState.settings.aiPlayer;
+  console.log("computer turn", { aiPlayer });
+  const player = gameState.settings.playerPick;
+  const currentBoard = gameState.state.currentBoard;
+  const aiMoveChoice = aiMoves(currentBoard, player, aiPlayer);
+  const validMove = gameState.checkValidMove(aiMoveChoice.index);
+
+  if (validMove) {
+    gameState.update(aiMoveChoice.index, aiPlayer);
+    gameState.checkState();
+    if (gameState.state.winner && !gameState.state.won) {
+      gameState.updateWinner(aiPlayer);
+      gameState.updateLosses();
+    }
+  }
 }

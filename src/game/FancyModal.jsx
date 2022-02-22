@@ -52,6 +52,7 @@ export function FancyModal({
   handleExit,
   handleNextRound,
   playerSelection,
+  aiPlayer,
   setRestartSetting,
   gameState,
 }) {
@@ -73,10 +74,9 @@ export function FancyModal({
 
   useEffect(() => {
     if (gameState.winner) {
+      console.log("winner", { playerSelection }, gameState.won);
       setWinState(
-        playerSelection === gameState.currentPlayer
-          ? "OH NO, YOU LOST..."
-          : "YOU WON!"
+        playerSelection === gameState.won ? "YOU WON!" : "OH NO, YOU LOST..."
       );
       toggleModal();
     }
@@ -93,10 +93,8 @@ export function FancyModal({
         >
           <p>{winState}</p>
           <Container>
-            {gameState.currentPlayer === "O" ? <MiniIconX /> : <MiniIconO />}
-            <StyledHeader
-              color={gameState.currentPlayer === "O" ? "#31C3BD" : "#F2B137"}
-            >
+            {gameState.won === "O" ? <MiniIconO /> : <MiniIconX />}
+            <StyledHeader color={gameState.won === "O" ? "#F2B137" : "#31C3BD"}>
               TAKES THE ROUND
             </StyledHeader>
           </Container>

@@ -17,11 +17,12 @@ function App() {
     winner: false,
     tie: false,
     currentPlayer: "X",
+    won: "",
   });
   const [playerSettings, setPlayerSettings] = useState({
-    playersPick: "",
-    gameMode: "",
-    aiPlayer: "",
+    playersPick: null,
+    gameMode: null,
+    aiPlayer: null,
   });
   const [playerScore, setPlayerScore] = useState({
     wins: 0,
@@ -29,25 +30,20 @@ function App() {
     losses: 0,
   });
 
-  const updateSettings = (gameMode, selection = "X", aiSelection = "O") => {
+  const updateSettings = (gameMode, selection, aiSelection) => {
+    console.log({ selection, aiSelection, gameMode });
+
     setPlayerSettings({
       ...playerSettings,
+      gameMode: gameMode,
       playersPick: selection,
       aiPlayer: aiSelection,
     });
-
-    if (gameMode) {
-      setPlayerSettings({
-        ...playerSettings,
-        playersPick: selection,
-        gameMode: gameMode,
-      });
-    }
   };
 
   const handleUpdate = (id) => {
     let { state, playerScore } = boardUpdater(id);
-    let { currentBoard, winner, tie, playerTurn } = state;
+    let { currentBoard, winner, tie, playerTurn, won } = state;
 
     setGameState({
       ...gameState,
@@ -55,6 +51,7 @@ function App() {
       winner: winner,
       tie: tie,
       currentPlayer: playerTurn,
+      won: won,
     });
 
     setPlayerScore(playerScore);
@@ -67,7 +64,8 @@ function App() {
       winner: false,
       tie: false,
       currentPlayer: "X",
-      playerSelection: "",
+      won: "",
+      start: false,
     });
 
     setPlayerSettings({
@@ -79,24 +77,25 @@ function App() {
   const handleStartGame = () => {
     const { newState, newSettings, newScore } = startNewGame(playerSettings);
 
+    console.log({ newState, newSettings, newScore });
     setGameState({
       ...gameState,
       boardState: newState.currentBoard,
+      currentPlayer: newState.playerTurn,
     });
-    // FIXME: the state is not being set right needs to update only players new score, we need to update each win loss and tie state
     setPlayerScore(newScore);
     setPlayerSettings(newSettings);
   };
 
   // start the next round with player default settings
   const handleNextRound = () => {
-    const { state } = startNewGame(playerSettings);
+    const { newState } = startNewGame(playerSettings);
     setGameState({
       ...gameState,
-      boardState: state.currentBoard,
+      boardState: newState.currentBoard,
       winner: false,
       tie: false,
-      setCurrentPlayer: "X",
+      currentPlayer: "X",
     });
   };
 

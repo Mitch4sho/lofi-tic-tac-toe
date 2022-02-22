@@ -5,6 +5,7 @@ export class Game {
       playerTurn: "X",
       winner: false,
       tie: false,
+      won: null,
     };
 
     this.playerInfo = {
@@ -104,5 +105,9 @@ export class Game {
 
   updateTies() {
     this.playerScore.ties += 1;
+  }
+
+  updateWinner(player) {
+    this.state.won = player;
   }
 }

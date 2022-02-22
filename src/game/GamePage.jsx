@@ -83,6 +83,7 @@ export default function GamePage({
         handleExit={restart}
         setRestartSetting={setRestartSetting}
         playerSelection={playerSettings.playersPick}
+        aiPlayer={playerSettings.aiPlayer}
         gameState={gameState}
       />
     </GamePageWrapper>
