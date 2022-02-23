@@ -9,7 +9,6 @@ export function startNewGame(settings) {
   // see what kind of game play it is and see if CPU needs to make the first move
 
   if (gameState.settings.aiPlayer === gameState.state.playerTurn) {
-    console.log("computer moves");
     computerMoves();
   }
   const newState = gameState.state;
@@ -31,7 +30,6 @@ export function boardUpdater(idx) {
     gameState.updateTies();
   }
 
-  console.log("updating", { gameState });
   return gameState;
 }
 
@@ -43,7 +41,6 @@ export function restartGame() {
 function playerMoves(idx) {
   const validMove = gameState.checkValidMove(idx);
   const player = gameState.state.playerTurn;
-  console.log("players turn", { player });
 
   if (validMove) {
     gameState.update(idx, player);
@@ -57,14 +54,14 @@ function playerMoves(idx) {
 
 export function computerMoves() {
   const aiPlayer = gameState.settings.aiPlayer;
-  console.log("computer turn", { aiPlayer });
   const player = gameState.settings.playerPick;
   const currentBoard = gameState.state.currentBoard;
   const aiMoveChoice = aiMoves(currentBoard, player, aiPlayer);
-  const validMove = gameState.checkValidMove(aiMoveChoice.index);
+  console.log({ aiMoveChoice });
+  const validMove = gameState.checkValidMove(aiMoveChoice);
 
   if (validMove) {
-    gameState.update(aiMoveChoice.index, aiPlayer);
+    gameState.update(aiMoveChoice, aiPlayer);
     gameState.checkState();
     if (gameState.state.winner && !gameState.state.won) {
       gameState.updateWinner(aiPlayer);

@@ -74,7 +74,6 @@ export function FancyModal({
 
   useEffect(() => {
     if (gameState.winner) {
-      console.log("winner", { playerSelection }, gameState.won);
       setWinState(
         playerSelection === gameState.won ? "YOU WON!" : "OH NO, YOU LOST..."
       );

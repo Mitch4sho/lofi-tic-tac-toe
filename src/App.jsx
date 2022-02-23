@@ -31,8 +31,6 @@ function App() {
   });
 
   const updateSettings = (gameMode, selection, aiSelection) => {
-    console.log({ selection, aiSelection, gameMode });
-
     setPlayerSettings({
       ...playerSettings,
       gameMode: gameMode,
@@ -77,7 +75,6 @@ function App() {
   const handleStartGame = () => {
     const { newState, newSettings, newScore } = startNewGame(playerSettings);
 
-    console.log({ newState, newSettings, newScore });
     setGameState({
       ...gameState,
       boardState: newState.currentBoard,
