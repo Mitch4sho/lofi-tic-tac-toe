@@ -30,8 +30,6 @@ export default function GamePage({
 
   const restart = () => {
     setIsOpen(true);
-    handleRestart();
-    navigate("/");
   };
 
   const nextRound = () => {
