@@ -14,6 +14,7 @@ A lofi tictactoe game with a AI, made using React and styled components. The AI 
 - [x] Lofi Music
 - [ ] Local Player vs Player
 - [ ] Online Player vs Player
+- [ ] AI Difficulty level
 
 # Socials
 

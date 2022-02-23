@@ -19,7 +19,6 @@ export function startNewGame(settings) {
 }
 
 export function boardUpdater(idx) {
-  // TODO: Need to update so the change of each players turn is not that fast may be return objects to see if a player has one
   playerMoves(idx);
 
   if (

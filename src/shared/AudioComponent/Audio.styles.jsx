@@ -3,7 +3,7 @@ import Audio from "./Audio";
 
 export const AudioStyled = styled(Audio)`
   width: 328px;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
   font-size: ${(props) => props.theme.fontSizing.small};

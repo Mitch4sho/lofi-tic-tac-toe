@@ -35,7 +35,7 @@ function App() {
       ...playerSettings,
       gameMode: gameMode,
       playersPick: gameMode === "CPU" ? "O" : selection,
-      aiPlayer: gameMode === "CPU" ? "X" : selection,
+      aiPlayer: gameMode === "CPU" ? "X" : aiSelection,
     });
   };
 
