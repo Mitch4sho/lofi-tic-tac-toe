@@ -22,7 +22,10 @@ export function boardUpdater(idx) {
   // TODO: Need to update so the change of each players turn is not that fast may be return objects to see if a player has one
   playerMoves(idx);
 
-  if (gameState.settings.aiPlayer === gameState.state.playerTurn) {
+  if (
+    gameState.settings.aiPlayer === gameState.state.playerTurn &&
+    !gameState.state.won
+  ) {
     computerMoves();
   }
 
@@ -57,7 +60,6 @@ export function computerMoves() {
   const player = gameState.settings.playerPick;
   const currentBoard = gameState.state.currentBoard;
   const aiMoveChoice = aiMoves(currentBoard, player, aiPlayer);
-  console.log({ aiMoveChoice });
   const validMove = gameState.checkValidMove(aiMoveChoice);
 
   if (validMove) {

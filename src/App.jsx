@@ -17,7 +17,7 @@ function App() {
     winner: false,
     tie: false,
     currentPlayer: "X",
-    won: "",
+    won: null,
   });
   const [playerSettings, setPlayerSettings] = useState({
     playersPick: null,
@@ -62,7 +62,7 @@ function App() {
       winner: false,
       tie: false,
       currentPlayer: "X",
-      won: "",
+      won: null,
       start: false,
     });
 
@@ -87,12 +87,14 @@ function App() {
   // start the next round with player default settings
   const handleNextRound = () => {
     const { newState } = startNewGame(playerSettings);
+    console.log({ newState });
     setGameState({
       ...gameState,
       boardState: newState.currentBoard,
       winner: false,
       tie: false,
       currentPlayer: "X",
+      won: null,
     });
   };
 

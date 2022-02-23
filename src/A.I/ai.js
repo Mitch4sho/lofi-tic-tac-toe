@@ -24,7 +24,6 @@ export function aiMoves(currBoard, huPlayer, aiPlayer) {
       board.push(currRow);
     }
 
-    console.table(board);
     return board;
   }
   const board = createBoard();
@@ -46,7 +45,7 @@ export function aiMoves(currBoard, huPlayer, aiPlayer) {
         }
       }
     }
-
+    if (!move) return [null, null];
     return [move.i, move.j];
   }
 

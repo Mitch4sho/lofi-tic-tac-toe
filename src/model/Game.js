@@ -30,6 +30,7 @@ export class Game {
     this.state.winner = false;
     this.state.tie = false;
     this.state.playerTurn = "X";
+    this.state.won = null;
   }
 
   resetGame() {
@@ -73,7 +74,7 @@ export class Game {
   checkForTie() {
     let tie = true;
     this.state.currentBoard.forEach((el) => {
-      if (typeof el !== "number") tie = false;
+      if (typeof el === "number") tie = false;
     });
 
     return tie;
