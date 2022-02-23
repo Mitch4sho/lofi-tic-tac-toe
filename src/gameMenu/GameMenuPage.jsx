@@ -27,8 +27,8 @@ export default function GameMenuPage({ updateSettings }) {
       <ButtonStyled onClick={() => handleNewGame("CPU")}>
         NEW GAME (VS CPU)
       </ButtonStyled>
-      <ButtonStyled primary onClick={() => handleNewGame("PLAYER")}>
-        NEW GAME (VS PLAYER)
+      <ButtonStyled disabled primary onClick={() => handleNewGame("PLAYER")}>
+        TBA (VS PLAYER)
       </ButtonStyled>
     </GameMenuWrapper>
   );

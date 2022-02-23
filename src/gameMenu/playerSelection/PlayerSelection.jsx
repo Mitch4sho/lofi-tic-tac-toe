@@ -22,6 +22,7 @@ export default function PlayerSelection({ className, handlePlayerUpdate }) {
           <MiniIconO fill={color ? "#1A2A33" : "#DBE8ED"} />
         </button>
       </SelectionContainer>
+      <p>CPU IS X ALWAYS</p>
       <p>REMEMBER: X GOES FIRST</p>
     </div>
   );

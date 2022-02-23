@@ -34,8 +34,8 @@ function App() {
     setPlayerSettings({
       ...playerSettings,
       gameMode: gameMode,
-      playersPick: selection,
-      aiPlayer: aiSelection,
+      playersPick: gameMode === "CPU" ? "O" : selection,
+      aiPlayer: gameMode === "CPU" ? "X" : selection,
     });
   };
 
@@ -87,7 +87,6 @@ function App() {
   // start the next round with player default settings
   const handleNextRound = () => {
     const { newState } = startNewGame(playerSettings);
-    console.log({ newState });
     setGameState({
       ...gameState,
       boardState: newState.currentBoard,
