@@ -2,11 +2,11 @@
 
 A lofi tictactoe game with a AI, made using React and styled components. The AI uses the minimax algorithm to look through all the possible combination of game states and returns the best one. It will always make the best possible move.
 
-#Demo
+# Demo
 
 [coming soon]()
 
-#Features
+# Features
 
 - [ ] Responsive UI
 - [ ] Animations
